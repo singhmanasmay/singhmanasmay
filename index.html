@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manasmay Singh</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <span class="close"></span>
+                <span class="minimize"></span>
+                <span class="maximize"></span>
+            </div>
+            <div class="terminal-title">🐱 kitty @ portfolio:~</div>
+        </div>
+        <div class="terminal-content">
+            <div class="command-history">
+
+                <div class="output">
+                    <pre style="color: #bb9af7; font-size: 10px; margin-bottom: 15px; opacity: 0.8;">
+    ╔═══════════════════════════════════════════════════════════════╗
+    ║  🐱 Kitty Terminal v1.0.0 - High Performance Terminal         ║
+    ║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━     ║
+    ║  Welcome to the future of terminal computing                  ║
+    ║  Type 'help' for available commands                           ║
+    ╚═══════════════════════════════════════════════════════════════╝
+                    </pre>
+                </div>
+
+            </div>
+            <div class="input-line">
+                <span class="prompt">manasmay@portfolio</span><span style="color: #7dcfff;">~</span><span style="color: #9ece6a;">❯</span>
+                <input type="text" id="terminalInput" autofocus autocomplete="off" spellcheck="false">
+                <span class="cursor">█</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        const spinnerChars = ['|', '/', '—', '\\'];
+        let spinnerIndex = 0;
+        
+        setInterval(() => {
+            const spinners = document.querySelectorAll('.spinner');
+            spinners.forEach(spinner => {
+                spinner.textContent = spinnerChars[spinnerIndex];
+            });
+            spinnerIndex = (spinnerIndex + 1) % spinnerChars.length;
+        }, 200);
+
+        const terminalInput = document.getElementById('terminalInput');
+        const commandHistory = document.querySelector('.command-history');
+        const terminalContent = document.querySelector('.terminal-content');
+
+        const commands = {
+            help: `Available commands:<br>
+    whoami       - Display my identity<br>
+    about        - Show information about me<br>
+    skills       - List my technical skills<br>
+    contact      - Display contact information<br>
+    clear        - Clear the terminal<br>
+    ls           - List available files<br>
+    cat [file]   - Display file contents<br>
+    echo [text]  - Print text to terminal`,
+            
+            whoami: `███╗   ███╗ █████╗ ███╗   ██╗ █████╗ ███████╗███╗   ███╗ █████╗ ██╗   ██╗    ███████╗██╗███╗   ██╗ ██████╗ ██╗  ██╗
+████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝████╗ ████║██╔══██╗╚██╗ ██╔╝    ██╔════╝██║████╗  ██║██╔════╝ ██║  ██║
+██╔████╔██║███████║██╔██╗ ██║███████║███████╗██╔████╔██║███████║ ╚████╔╝     ███████╗██║██╔██╗ ██║██║  ███╗███████║
+██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══██║╚════██║██║╚██╔╝██║██╔══██║  ╚██╔╝      ╚════██║██║██║╚██╗██║██║   ██║██╔══██║
+██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║███████║██║ ╚═╝ ██║██║  ██║   ██║       ███████║██║██║ ╚████║╚██████╔╝██║  ██║
+╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝       ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝`,
+            
+            about: `<span style="color: #e0af68;">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><br>
+<strong>ABOUT</strong><br>
+<span style="color: #e0af68;">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><br>
+📛 Name: Manasmay Singh<br>
+🎂 Age: 17<br>
+🌍 Country: India<br>
+🎓 Education: Currently studying Computer Science at Scaler School of Technology<br>
+💻 Focus: Full-stack development, cybersecurity, and web development<br>
+<span style="color: #e0af68;">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>`,
+            
+            skills: `<span style="color: #e0af68;">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><br>
+<strong>TECH STACK</strong><br>
+<span style="color: #e0af68;">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><br>
+HTML        [██████████████████████████████░░░░░░░░░░░░░░░░░░░░] 60%<br>
+CSS         [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 40%<br>
+JavaScript  [███████████████████████████████████░░░░░░░░░░░░░░░] 70%<br>
+Python      [█████████████████████████████████████████████░░░░░] 90%<br>
+React       [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 20%<br>
+Git         [█████████████████████████████████████████████░░░░░] 90%<br>
+C++         [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 30%<br>
+Kotlin      [████████████████████████████████████████░░░░░░░░░░] 80%<br>
+Java        [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 40%<br>
+<span style="color: #e0af68;">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>`,
+            
+            contact: `<span style="color: #bb9af7;">═════════════════════════════════════════════════</span><br>
+EMAIL: singhmanasmay@gmail.com<br>
+GITHUB: github.com/manasmaysingh<br>
+<span style="color: #bb9af7;">═════════════════════════════════════════════════</span>`,
+            
+            ls: `about.txt  tech_stack.txt  contact.txt`,
+        };
+
+        // Handle command input
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const command = this.value.trim();
+                
+                if (command) {
+                    // Add command to history
+                    const commandLine = document.createElement('div');
+                    commandLine.className = 'command-line';
+                    commandLine.innerHTML = `<span class="prompt">manasmay@portfolio</span><span style="color: #7dcfff;">~</span><span style="color: #9ece6a;">❯</span> ${command}`;
+                    commandHistory.appendChild(commandLine);
+                    
+                    // Process command
+                    const output = document.createElement('div');
+                    output.className = 'output';
+                    
+                    if (command === 'clear') {
+                        commandHistory.innerHTML = '';
+                    } else if (command.startsWith('cat ')) {
+                        const file = command.substring(4);
+                        if (file === 'about.txt') {
+                            output.innerHTML = commands.about;
+                        } else if (file === 'tech_stack.txt') {
+                            output.innerHTML = commands.skills;
+                        } else if (file === 'contact.txt') {
+                            output.innerHTML = commands.contact;
+                        } else {
+                            output.innerHTML = `<span style="color: #f7768e;">cat: ${file}: No such file or directory</span>`;
+                        }
+                        commandHistory.appendChild(output);
+                    } else if (command.startsWith('echo ')) {
+                        output.textContent = command.substring(5);
+                        commandHistory.appendChild(output);
+                    } else if (commands[command]) {
+                        if (command === 'whoami') {
+                            output.innerHTML = '<pre class="ascii-art">' + commands[command] + '</pre>';
+                        } else {
+                            output.innerHTML = commands[command];
+                        }
+                        commandHistory.appendChild(output);
+                    } else {
+                        output.innerHTML = `<span style="color: #f7768e;">Command not found: ${command}</span><br>Type 'help' for available commands.`;
+                        commandHistory.appendChild(output);
+                    }
+                }
+                
+                this.value = '';
+                terminalContent.scrollTop = terminalContent.scrollHeight;
+            }
+        });
+
+        // Keep input focused
+        terminalContent.addEventListener('click', () => {
+            terminalInput.focus();
+        });
+
+        // Focus on load
+        window.addEventListener('load', () => {
+            terminalInput.focus();
+        });
+    </script>
+</body>
+</html>
