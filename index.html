@@ -15,7 +15,7 @@
                 <span class="minimize"></span>
                 <span class="maximize"></span>
             </div>
-            <div class="terminal-title">🐱 kitty @ portfolio:~</div>
+            <div class="terminal-title">konsole @ portfolio:~</div>
         </div>
         <div class="terminal-content">
             <div class="command-history">
@@ -23,9 +23,6 @@
                 <div class="output">
                     <pre style="color: #bb9af7; font-size: 10px; margin-bottom: 15px; opacity: 0.8;">
     ╔═══════════════════════════════════════════════════════════════╗
-    ║  🐱 Kitty Terminal v1.0.0 - High Performance Terminal         ║
-    ║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━     ║
-    ║  Welcome to the future of terminal computing                  ║
     ║  Type 'help' for available commands                           ║
     ╚═══════════════════════════════════════════════════════════════╝
                     </pre>
@@ -99,25 +96,22 @@ Java        [████████████████████░░�
             
             contact: `<span style="color: #bb9af7;">═════════════════════════════════════════════════</span><br>
 EMAIL: singhmanasmay@gmail.com<br>
-GITHUB: github.com/manasmaysingh<br>
+GITHUB: github.com/singhmanasmay<br>
 <span style="color: #bb9af7;">═════════════════════════════════════════════════</span>`,
             
             ls: `about.txt  tech_stack.txt  contact.txt`,
         };
 
-        // Handle command input
         terminalInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 const command = this.value.trim();
                 
                 if (command) {
-                    // Add command to history
                     const commandLine = document.createElement('div');
                     commandLine.className = 'command-line';
                     commandLine.innerHTML = `<span class="prompt">manasmay@portfolio</span><span style="color: #7dcfff;">~</span><span style="color: #9ece6a;">❯</span> ${command}`;
                     commandHistory.appendChild(commandLine);
                     
-                    // Process command
                     const output = document.createElement('div');
                     output.className = 'output';
                     
@@ -156,12 +150,10 @@ GITHUB: github.com/manasmaysingh<br>
             }
         });
 
-        // Keep input focused
         terminalContent.addEventListener('click', () => {
             terminalInput.focus();
         });
 
-        // Focus on load
         window.addEventListener('load', () => {
             terminalInput.focus();
         });
